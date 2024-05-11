@@ -45,3 +45,44 @@ INSERT INTO grade (student_name, section_id, score) VALUES
 ('Sara Bisat', 'CS101-A', 87),
 ('James Fields', 'CS101-B', 46),
 ('Helena Sepulvida', 'CS103-A', 72);
+
+-- findAverageScoreBySection
+SELECT section_id as Seccion, AVG(score) as Calificacion
+FROM grade
+GROUP BY section_id ORDER BY AVG(score) ASC;
+
+-- findAverageScoreBySectionWithCapacity(Long minEnrolled)
+SELECT section_id, AVG(score)
+FROM grade GROUP BY section_id
+HAVING COUNT(*) >= ?1 ORDER BY AVG(score);
+
+-- findAverageScoreBySectionWithCapacity2(@Param("minEnrolled") long minEnrolled)
+SELECT section_id, AVG(score)
+FROM grade GROUP BY grade.section_id
+HAVING COUNT(*) >= :minEnrolled ORDER BY AVG(score);
+
+-- findAverageScoreBySectionWithCapacityNative(@Param("score") double score);
+SELECT student_name, CAST(AVG(score) AS double)
+FROM Grade GROUP BY student_name
+HAVING AVG(score) < :score  ORDER BY student_name DESC;
+
+-- findScoreGreaterThan50();
+SELECT student_name as Nombre, score as Calificacion
+FROM grade WHERE score > 50 ORDER BY score;
+
+-- findScoreGreaterThan70Sorted();
+SELECT student_name as Nombre, score as Calificación
+FROM grade WHERE score > 70 ORDER BY student_name;
+
+-- studentsExcludingSection();
+SELECT student_name as Nombre, section_id as Seccion
+FROM grade WHERE section_id != 'CS101-A';
+
+-- findMaxScoreBySection();
+SELECT section_id as Seccion, MAX(score) as Calificación
+FROM grade
+GROUP BY section_id;
+
+-- findByAvgScoreLessThan(Double score);
+SELECT student_name as Nombre, AVG(score) as Calificacion
+FROM grade GROUP BY student_name HAVING AVG(score) < ?1;

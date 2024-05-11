@@ -1,5 +1,6 @@
 package com.miguelprojects;
 
+import com.miguelprojects.model.Grade;
 import com.miguelprojects.repository.GradeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -3,6 +3,8 @@ package com.miguelprojects.model;
 import jakarta.persistence.*;
 import org.hibernate.type.descriptor.jdbc.SmallIntJdbcType;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "section")
 
@@ -12,10 +14,10 @@ public class Section {
     private String id;
 
     @Column(name = "course_code")
-    private String course_code;
+    private String courseCode;
 
     @Column(name = "room_num")
-    private int room_num;
+    private int roomNum;
 
     @Column(name = "instructor")
     private String instructor;
@@ -23,10 +25,10 @@ public class Section {
 
     public Section() {}
 
-    public Section(String id, String course_code, int room_num, String instructor) {
+    public Section(String id, String courseCode, int roomNum, String instructor) {
         this.id = id;
-        this.course_code = course_code;
-        this.room_num = room_num;
+        this.courseCode = courseCode;
+        this.roomNum = roomNum;
         this.instructor = instructor;
     }
 
@@ -38,20 +40,20 @@ public class Section {
         this.id = id;
     }
 
-    public String getCourse_code() {
-        return course_code;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public void setCourse_code(String course_code) {
-        this.course_code = course_code;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public int getRoom_num() {
-        return room_num;
+    public int getRoomNum() {
+        return roomNum;
     }
 
-    public void setRoom_num(int room_num) {
-        this.room_num = room_num;
+    public void setRoom_num(int roomNum) {
+        this.roomNum = roomNum;
     }
 
     public String getInstructor() {
@@ -66,9 +68,22 @@ public class Section {
     public String toString() {
         return "Section{" +
                 "id=" + id +
-                ", course_code='" + course_code + '\'' +
-                ", room_num=" + room_num +
+                ", courseCode='" + courseCode + '\'' +
+                ", roomNum=" + roomNum +
                 ", instructor='" + instructor + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Section section = (Section) o;
+        return roomNum == section.roomNum && Objects.equals(id, section.id) && Objects.equals(courseCode, section.courseCode) && Objects.equals(instructor, section.instructor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, courseCode, roomNum, instructor);
     }
 }

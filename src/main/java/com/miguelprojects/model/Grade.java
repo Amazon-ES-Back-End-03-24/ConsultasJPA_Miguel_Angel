@@ -28,6 +28,10 @@ public class Grade {
         this.score = score;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getStudentName() {
         return studentName;
     }
@@ -62,4 +66,16 @@ public class Grade {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grade grade = (Grade) o;
+        return Objects.equals(id, grade.id) && Objects.equals(studentName, grade.studentName) && Objects.equals(sectionId, grade.sectionId) && Objects.equals(score, grade.score);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, studentName, sectionId, score);
+    }
 }
