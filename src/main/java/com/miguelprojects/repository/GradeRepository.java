@@ -20,7 +20,6 @@ public interface GradeRepository extends JpaRepository<Grade, Integer> {
 
     @Query(value="SELECT g.sectionId, AVG(g.score) FROM Grade g GROUP BY g.sectionId HAVING COUNT(*) >= ?1 ORDER BY AVG(g.score)")
     List<Object[]> findAverageScoreBySectionWithCapacity(Long minEnrolled);
-
     @Query(value="SELECT g.sectionId, AVG(g.score) FROM Grade g GROUP BY g.sectionId HAVING COUNT(*) >= :minEnrolled ORDER BY AVG(g.score)")
     List<Object[]> findAverageScoreBySectionWithCapacity2(@Param("minEnrolled") long minEnrolled);
 
